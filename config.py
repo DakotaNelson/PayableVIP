@@ -1,0 +1,5 @@
+DEBUG = True
+
+PARSE_APP_ID = ''
+PARSE_API_KEY = ''
+PARSE_MASTER_KEY = ''
