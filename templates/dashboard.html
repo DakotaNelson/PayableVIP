@@ -4,6 +4,11 @@
 Dashboard
 {% endblock %}
 
+{% block js %}
+<script src="{{ url_for('static', filename='js/billChart.js') }}"></script>
+<script src="{{ url_for('static', filename='js/lib/d3.min.js') }}" charset="utf-8"></script>
+{% endblock %}
+
 {% block css %}
 <!-- Style sheet link -->
 <link href="{{ url_for('static', filename='css/custom2.css') }}" rel="stylesheet" media="all">
@@ -12,10 +17,7 @@ Dashboard
 {% block body %}
 <div class="container-fluid">
 
-
-
 <div class="row">
-
 
 <div class="col-xs-4">
 <div class="panel panel-default">
@@ -49,22 +51,15 @@ Dashboard
   <div class="panel-heading">
     <h3 class="panel-title">Bill Trends</h3>
   </div>
-  <div class="panel-body blue-text">
-    <h4>On average what is the price of your fucking heating bill?</h4>
-    
+  <div class="panel-body blue-text bill-chart">
+    <!-- D3 chart goes here -->
   </div>
-  
-</div>
 
 </div>
 
 </div>
 
-
-{% for customer in inStore %}
-  {{ customer.fname }}
-  <br>
-{% endfor %}
+</div>
 
 {% endblock %}
 

@@ -54,14 +54,14 @@ def dashboard():
     u = User.login("arjun", "password")
     fname = u.fname
     lname = u.lname
-    
+
     name = fname + " " + lname
     email=u.email
     zipcode = u.zipcode
     state = u.state
     address = u.streetAddress
     city = u.city
-    
+
     billDue = dueDate().strftime("%A, %B %d")
     return render_template('dashboard.html', dueDate=billDue, name=name, email=email, city=city, address=address, state=state, zipcode=zipcode)
 
@@ -146,6 +146,25 @@ def makePayment():
     u.save()
 
     return json.dumps({"status":"success"})
+
+@app.route('/api/get-data', methods=['GET'])
+def getData():
+    username = request.args.get('username', None)
+
+    # TODO authentication to make sure this user
+    #      has permission to do this
+    if username is None:
+        return json.dumps({"status": "fail",
+                "reason": "Must include username."})
+
+    myBills = monthlyAverage(Bills.Query.filter(username=username))
+    allBills = monthlyAverage()
+    predBills = predictBills(3, username)
+
+    return json.dumps({'myBills': myBills,
+                       'allBills': allBills,
+                       'predictedBills': predBills})
+
 
 if __name__ == '__main__':
     app.run()

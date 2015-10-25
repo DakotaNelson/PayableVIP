@@ -33,3 +33,27 @@ body {
   background-color: #4055d0;
   display: none;
 }
+
+.bill-chart {
+  width: 400px;
+  height: 300px;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}

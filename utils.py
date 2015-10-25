@@ -49,13 +49,13 @@ def dueDate():
 
 def billPay(billid=None):
     u = User.login("arjun", "password")
-    
+
     if not billid:
         return
-    
+
     bill = Bills.Query.all(objectId=u.username)
     c = bill.cost
-    
+
     acc_balance = u.acctBalance
     if acc_balance > c:
         acc_balance = acc_balance - c
@@ -63,8 +63,8 @@ def billPay(billid=None):
         u.save()
         bill.paid = True
         bill.save()
-        
-    
+
+
 def monthlyAverage(data = None):
     if data is None:
         data = Bills.Query.all()
