@@ -82,7 +82,7 @@ $(document).ready(function() {
         .attr("class", "bar")
         .attr("x", function(d) { return x(d.month); })
         .attr("width", x.rangeBand())
-        .attr("y", function(d) { console.log(d); return y(d.y1); })
+        .attr("y", function(d) { return y(d.y1); })
         //.attr("height", function(d) { return height - y(d.total); });
         .attr("height", function(d) { return y(d.y0) - y(d.y1); })
         .style("fill", function(d) { return color(d.type); });
