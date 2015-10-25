@@ -11,6 +11,10 @@ $(document).ready(function() {
 
   var xAxis = d3.svg.axis()
         .scale(x)
+        .tickFormat(function(d) { 
+            dte = new Date(1970, d-1, 1);
+            return dte.toLocaleString('en-us', { month: "short" });
+          })
         .orient("bottom");
 
   var yAxis = d3.svg.axis()
@@ -33,12 +37,14 @@ $(document).ready(function() {
     data = data.myBills;
 
     cleaned = [];
+    months = [];
     _.each(data, function(value, key) {
       sum = value.water + value.electric + value.gas;
+      months.push(key);
       cleaned.push({"month":key, "total": sum});
     });
 
-    x.domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]); // ew
+    x.domain(months);
     y.domain([0, d3.max(cleaned, function(d) { return d.total; })]);
 
     svg.append("g")
