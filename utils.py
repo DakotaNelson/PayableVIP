@@ -49,7 +49,7 @@ def dueDate():
 
 def getMonthlyBillingInfo(username):
     month = date.today().month
-    
+
     allBills = Bills.Query.filter(username=username)
     monthlyBills = []
     monthlyCost = 0
@@ -70,7 +70,7 @@ def getMonthlyBillingInfo(username):
     monthlyBreakdown["bills"] = monthlyBills
     monthlyBreakdown["cost"] = monthlyCost
     monthlyBreakdown["split"] = utilitySplit
-    
+
     return monthlyBreakdown
 
 
@@ -132,10 +132,10 @@ def convertIntToMonth(n):
 #             m = multiples * 12
 #             r = n-m
 #             return (n+m+r)
-            
+
 
 def breakDownMonthlyCosts(months, period, padding):
-    
+
 #     monthlyBills = []
 #     utilitySplit = {}
 #     for bill in bills:
@@ -148,7 +148,7 @@ def breakDownMonthlyCosts(months, period, padding):
 #                 utilitySplit[bType] += cost
 #             else:
 #                 utilitySplit[bType] = cost
-    
+
     expenseSplit = {}
     for utilitySplit in months:
         for bType in months[utilitySplit]:
@@ -157,38 +157,38 @@ def breakDownMonthlyCosts(months, period, padding):
                 expenseSplit[bType] += cost
             else:
                 expenseSplit[bType] = cost
-    
+
     monthlyCost = 0
     for utility in expenseSplit:
         print "utility"
         total = expenseSplit[utility]
         expenseSplit[utility] = (float(total/period))*padding
         monthlyCost += expenseSplit[utility]
-          
+
     monthlyBreakdown = {}
     monthlyBreakdown["cost"] = monthlyCost
     monthlyBreakdown["split"] = expenseSplit
     monthlyBreakdown["months"] = months
 
-    
-    return monthlyBreakdown            
 
-def getMonthlyRates(username, prior_weight=8, future_weight=3, padding=1.1):
+    return monthlyBreakdown
+
+def getMonthlyRates(username, prior_weight=8, future_weight=3, padding=1.05):
     myBills = monthlyAverage(Bills.Query.filter(username=username))
     predBills = predictBills(future_weight, username)
     month = date.today().month
     found_months = {}
-    
+
     for m in xrange(1,prior_weight+1):
         prior_month = convertIntToMonth(month-m)
         found_months[prior_month] = myBills[prior_month]
-    
+
     for m in xrange(1,future_weight+1):
         next_month = convertIntToMonth(month+m)
         found_months[next_month] = predBills[next_month]
-    
+
     breakdown = breakDownMonthlyCosts(found_months, prior_weight+future_weight, padding)
-    
+
     return breakdown
 
 def predictBills(nMonths, username):

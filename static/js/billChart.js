@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  var margin = {top: 20, right: 20, bottom: 60, left: 60},
+  var margin = {top: 20, right: 60, bottom: 60, left: 60},
       width = 800 - margin.left - margin.right,
       height = 300 - margin.top - margin.bottom;
 
@@ -70,6 +70,26 @@ $(document).ready(function() {
         .attr("width", x.rangeBand())
         .attr("y", function(d) { return y(d.total); })
         .attr("height", function(d) { return height - y(d.total); });
+
+    $.get("/api/get-monthly-rate", {"username": "arjun"}, function(data) {
+      data = JSON.parse(data);
+
+      avgLine = svg.append("g")
+
+      avgLine.append("svg:line")
+           .attr("class", "average-line")
+           .attr("x1", 0)
+           .attr("x2", width)
+           .attr("y1", y(data.monthlyRate.cost))
+           .attr("y2", y(data.monthlyRate.cost))
+           .attr("class","label-line");
+
+      avgLine.append("text")
+           .attr("x", function(d) { return width + 3; })
+           .attr("y", y(data.monthlyRate.cost) + 4)
+           .text('$' + data.monthlyRate.cost.toFixed(2));
+    });
+
   });
 
 });
