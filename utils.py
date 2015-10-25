@@ -1,6 +1,8 @@
 import requests
 from requests.auth import HTTPBasicAuth
 
+from datetime import date
+
 def achCharge(amount, routingNo, acctNo):
     """
     {
@@ -38,6 +40,7 @@ def achCharge(amount, routingNo, acctNo):
 
     return r.json()
 
-def getInvoiceNo():
-    # must generate a unique (incrementing) integer
-    pass
+def dueDate():
+    d = date.today()
+    d.replace(day=20)
+    return d

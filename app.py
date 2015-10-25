@@ -21,8 +21,8 @@ def index():
 
 @app.route('/dashboard')
 def dashboard():
-    customers = [{"fname":"Bob"}, {"fname":"Joe"}]
-    return render_template('dashboard.html', inStore=customers)
+    billDue = dueDate().strftime("%A, %B %d")
+    return render_template('dashboard.html', dueDate=billDue)
 
 @app.route('/api/add-account', methods=['POST'])
 def addAccount():
@@ -65,6 +65,43 @@ def addAccount():
     # save the db updates now that we know they're valid
     u.routingNo = req['routingNo']
     u.acctNo = req['acctNo']
+    u.save()
+
+    return json.dumps({"status":"success"})
+
+@app.route('/api/make-payment', methods=['POST'])
+def makePayment():
+    req = request.get_json()
+
+    if req is None:
+        return json.dumps({"status": "fail",
+                "reason": "Must include JSON."})
+
+    # TODO authentication to make sure this user
+    #      has permission to do this
+    if not 'username' in req or not 'password' in req:
+        return json.dumps({"status": "fail",
+                "reason": "Must include username and password."})
+
+    if not 'amount' in req:
+        return json.dumps({"status": "fail",
+                "reason": "Must include payment amount."})
+
+    # make sure we can validate to the db
+    try:
+        u = User.login(req['username'], req['password'])
+    except:
+        return json.dumps({"status": "fail",
+                "reason": "Unable to log user in."})
+
+    # attempt the payment
+    res = achCharge(float(req['amount']), u['routingNo'], u['acctNo'])
+
+    if res['CmdStatus'] != 'Approved':
+        return json.dumps({"status": "fail",
+                "reason": "Unable to charge account."})
+
+    u.acctBalance += float(req['amount'])
     u.save()
 
     return json.dumps({"status":"success"})
