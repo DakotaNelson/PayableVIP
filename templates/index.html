@@ -4,6 +4,43 @@
 Index
 {% endblock %}
 
+{% block css %}
+    <link href="{{ url_for('static', filename='css/macbook.css') }}" rel="stylesheet" media="all">
+
+{% endblock %}
+
 {% block body %}
-This is the index.
+<div class="container-fluid">
+<div class="row top-buffer">
+</div>
+<div class="row">
+
+<div class="col-xs-offset-1 col-xs-5"><h1 class="bigger" style="color: #4055d0;">BE SMARTER ABOUT YOUR BILLS</h1>
+
+<h2 style="color: #fff;">Smooth out your utility bills with LevelPay and never have to take out a payday loan again.</h2>
+
+</div>
+
+<div class="col-xs-6"><div class="md-macbook-pro md-glare" style="font-size: 0.65em;">
+    <div class="md-lid">
+        <div class="md-camera"></div>
+
+        <div class="md-screen">
+            <img alt="LevelPay" src="/static/img/dashboard.png">
+            
+        </div>
+
+    </div>
+    <div class="md-base"></div>
+</div></div>
+
+
+
+</div>
+<div class="row">
+<div class="col-xs-offset-1 col-xs-5">
+<button type="button" class="btn btn-primary text-center">Start Planning Today</button>
+</div>
+</div>
+</div>
 {% endblock %}

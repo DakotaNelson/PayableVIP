@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title%}
+Index
+{% endblock %}
+
+{% block css %}
+    <link href="{{ url_for('static', filename='css/macbook.css') }}" rel="stylesheet" media="all">
+
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+<div class="row top-buffer">
+</div>
+
+
+<div class="row">
+<div class="col-xs-offset-4 col-xs-4">
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Question 1</h3>
+  </div>
+  <div class="panel-body blue-text">
+    <h4>On average what is the price of your fucking heating bill?</h4>
+    <form class="form-inline">
+      <div class="col-xs-offset-3 col-xs-2">
+	  <div class="form-group">
+	    <input type="text" class="form-control text-center" id="exampleInputName2" placeholder="Question 1">
+	  </div>
+	  </div>
+	  <div class="col-xs-2">
+	  </div>
+    </form>
+    <ol class="carousel-indicators">
+	<li data-target="#carousel-example-generic" data-slide-to="0"></li>
+	<li data-target="#carousel-example-generic" data-slide-to="1" class="active"></li>
+	<li data-target="#carousel-example-generic" data-slide-to="2" class="active"></li>
+	</ol>
+  </div>
+  <div class="row">
+  <div class="col-xs-12">
+  <p class="span text-right"><br />skip &nbsp;</p>
+  </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+
+</div>
+{% endblock %}
