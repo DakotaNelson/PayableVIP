@@ -4,10 +4,6 @@ from datetime import date
 
 from objects import Bills
 
-months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-
-utilities = ['Water', 'Gas', 'Electric']
-
 def achCharge(amount, routingNo, acctNo):
     """
     {
@@ -50,8 +46,9 @@ def dueDate():
     d.replace(day=20)
     return d
 
-def monthlyAverage():
-    data = Bills.Query.all()
+def monthlyAverage(data = None):
+    if data is None:
+        data = Bills.Query.all()
 
     utilities = []
     # get all the unique utilities types
@@ -71,18 +68,51 @@ def monthlyAverage():
 
     return ret
 
-def predictBills(nMonths):
-    currentMonth = date.today().month
+def predictBills(nMonths, username):
+    allBills = monthlyAverage()
+    myBills = Bills.Query.filter(username=username)
+    myBills = monthlyAverage(myBills)
 
-    monthRange = range(currentMonth-nMonths, nMonths*2)
-    for i in len(monthRange):
+    # all possible utilities
+    possibleUtilities = allBills[1].keys()
+
+    """
+    utilities = []
+    # get all the unique utilities types
+    for month in allBills:
+        for k in allBills[month].keys():
+            if k not in utilities:
+                utilities.append(k)
+
+    bills = {month:{} for month in range(1,13)}
+    for month in range(1,13):
+        for utility in utilities:
+            bills[month][utility] = [d.cost for d in myBills if d.due.month == month and d.type == utility]
+    print(bills)
+    """
+
+    utilities = {utility:1 for utility in possibleUtilities}
+    ratios = {month:utilities for month in range(1,13)}
+    for month in range(1,13):
+        for utility in possibleUtilities:
+            try:
+                if allBills[month][utility] == 0:
+                    ratios[month][utility] = 1
+                else:
+                    ratios[month][utility] = myBills[month][utility] / allBills[month][utility]
+            except KeyError:
+                ratios[month][utility] = 1
+
+    # now use the ratios for prediction
+    currentMonth = date.today().month
+    monthRange = range(currentMonth, currentMonth+nMonths+1)
+    for i in range(len(monthRange)):
         if monthRange[i] > 12:
             monthRange[i] = monthRange[i] % 13 + 1
 
-    print(monthRange)
-
     bills = {month:{} for month in monthRange}
     for month in monthRange:
-        for utility in utilities:
-            bills[utility] = Bills.Query.filter(type=utility)
-    print(bills)
+        for utility in possibleUtilities:
+            bills[month][utility] = ratios[month][utility] * allBills[month][utility]
+
+    return bills
