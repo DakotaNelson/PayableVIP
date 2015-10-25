@@ -3,7 +3,9 @@ from parse_rest.connection import register as parse_register
 from parse_rest.user import User
 import json
 
-from utils import achCharge
+from utils import achCharge, predictBills, monthlyAverage
+
+from objects import Bills
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -21,9 +23,13 @@ def index():
 
 @app.route('/test/')
 def test():
-    u = User.login("arjun", "password")
+    #u = User.login("arjun", "password")
 
-    return render_template('test.html', u=u.username)
+    #predictBills(3)
+
+    monthlyAverage()
+
+    return render_template('test.html', u="blah")
 
 @app.route('/questions/')
 def questions():

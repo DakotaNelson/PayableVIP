@@ -1,7 +1,12 @@
 import requests
 from requests.auth import HTTPBasicAuth
-
 from datetime import date
+
+from objects import Bills
+
+months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+utilities = ['Water', 'Gas', 'Electric']
 
 def achCharge(amount, routingNo, acctNo):
     """
@@ -44,3 +49,40 @@ def dueDate():
     d = date.today()
     d.replace(day=20)
     return d
+
+def monthlyAverage():
+    data = Bills.Query.all()
+
+    utilities = []
+    # get all the unique utilities types
+    for datum in data:
+        if datum.type not in utilities:
+            utilities.append(datum.type)
+
+    ret = {month:{} for month in range(1,13)}
+    for utility in utilities:
+        for month in range(1,13):
+            # [d['Water'] for d in data if d['Month'] == 'Jan']
+            vals = [d.cost for d in data if d.due.month == month and d.type == utility]
+            if len(vals) == 0:
+                ret[month][utility] = 0
+            else:
+                ret[month][utility] = sum(vals) / len(vals)
+
+    return ret
+
+def predictBills(nMonths):
+    currentMonth = date.today().month
+
+    monthRange = range(currentMonth-nMonths, nMonths*2)
+    for i in len(monthRange):
+        if monthRange[i] > 12:
+            monthRange[i] = monthRange[i] % 13 + 1
+
+    print(monthRange)
+
+    bills = {month:{} for month in monthRange}
+    for month in monthRange:
+        for utility in utilities:
+            bills[utility] = Bills.Query.filter(type=utility)
+    print(bills)
