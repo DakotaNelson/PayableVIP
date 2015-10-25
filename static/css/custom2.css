@@ -61,3 +61,7 @@ h4 {
   stroke: #000;
   shape-rendering: crispEdges;
 }
+
+.label-line {
+  stroke: black;
+}

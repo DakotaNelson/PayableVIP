@@ -60,8 +60,14 @@ def dashboard():
     u = User.login("arjun", "password")
     fname = u.fname
     lname = u.lname
+<<<<<<< HEAD
         
     
+=======
+    username = u.username
+
+
+>>>>>>> fc1a4b3c857fb88e4cbc1631188f073b1f0dd403
     name = fname + " " + lname
     email=u.email
     zipcode = u.zipcode
@@ -116,7 +122,6 @@ def addAccount():
     # validate the account with a $1 charge
     res = achCharge(1, req['routingNo'], req['acctNo'])
 
-    print(res)
     if res['CmdStatus'] != 'Approved':
         return json.dumps({"status": "fail",
                 "reason": "Account invalid."})
@@ -189,6 +194,19 @@ def getData():
                        'predictedBills': predBills})
     """
 
+@app.route('/api/get-monthly-rate', methods=['GET'])
+def getMonthlyRate():
+    username = request.args.get('username', None)
+
+    # TODO authentication to make sure this user
+    #      has permission to do this
+    if username is None:
+        return json.dumps({"status": "fail",
+                "reason": "Must include username."})
+
+    rate = getMonthlyRates(username)
+
+    return json.dumps({'monthlyRate': rate})
 
 if __name__ == '__main__':
     app.run()
