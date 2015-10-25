@@ -42,6 +42,10 @@ def registration():
 
     return render_template('registration.html')
 
+@app.route('/btn_pay/', methods=['POST'])
+def button():
+    print "hello"
+    return "response", 200, {'Content-Type': 'text/plain'}
 
 @app.route('/additional_info/', methods=['POST', 'GET'])
 def info():
@@ -56,7 +60,6 @@ def dashboard():
     u = User.login("arjun", "password")
     fname = u.fname
     lname = u.lname
-    username = u.username
         
     
     name = fname + " " + lname
@@ -65,9 +68,24 @@ def dashboard():
     state = u.state
     address = u.streetAddress
     city = u.city
+    
+#     monthly = getMonthlyRates("arjun")
+#     cost = monthly["cost"]
+#     cost = round(cost, 2)
+#     split = monthly["split"]
+#     
+#     water = split["water"]
+#     gas = split["gas"]
+#     electric = split["electric"]
+
+    water = 57.39
+    electric = 139.16
+    gas = 140.74
+    cost = 337
+    
 
     billDue = dueDate().strftime("%A, %B %d")
-    return render_template('dashboard.html', dueDate=billDue, name=name, email=email, city=city, address=address, state=state, zipcode=zipcode)
+    return render_template('dashboard.html', dueDate=billDue, name=name, email=email, city=city, address=address, state=state, zipcode=zipcode, cost=cost, water=water, gas=gas, electric=electric)
 
 @app.route('/api/add-account/', methods=['POST'])
 def addAccount():
@@ -138,20 +156,18 @@ def makePayment():
     except:
         return json.dumps({"status": "fail",
                 "reason": "Unable to log user in."})
-
+        
     # attempt the payment
-    res = achCharge(float(req['amount']), u['routingNo'], u['acctNo'])
-
+    res = achCharge(float(req['amount']), u.routingNo, u.acctNo)
     if res['CmdStatus'] != 'Approved':
         return json.dumps({"status": "fail",
                 "reason": "Unable to charge account."})
 
     u.acctBalance += float(req['amount'])
     u.save()
-
     return json.dumps({"status":"success"})
 
-@app.route('/api/get-data', methods=['GET'])
+@app.route('/api/get-data/', methods=['GET'])
 def getData():
     username = request.args.get('username', None)
 

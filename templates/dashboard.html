@@ -5,8 +5,10 @@ Dashboard
 {% endblock %}
 
 {% block js %}
-<script src="{{ url_for('static', filename='js/billChart.js') }}"></script>
-<script src="{{ url_for('static', filename='js/lib/d3.min.js') }}" charset="utf-8"></script>
+<!--  <script src="{{ url_for('static', filename='js/billChart.js') }}"></script>
+<script src="{{ url_for('static', filename='js/lib/d3.min.js') }}" charset="utf-8"></script>-->
+<script src="{{ url_for('static', filename='js/button.js') }}" charset="utf-8"></script>
+
  {% endblock %}
 
 {% block css %}
@@ -21,10 +23,10 @@ Dashboard
 
 <div class="col-xs-4">
 <div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Your Profile</h3>
+  <div class="panel-heading" style="background: #fff; border-color: #fff;">
+    <h3 class="panel-title text-center">Your Profile</h3>
   </div>
-  <div class="panel-body blue-text">
+  <div class="panel-body" style="color: #d3d3d3;">
     <h4>{{ name }}</h4>
     <h4>{{ email }}</h4>
     <h4>{{ address }}</h4>
@@ -33,13 +35,32 @@ Dashboard
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Flat Rate</h3>
+  <div class="panel-heading" style="background: #fff; border-color: #fff; color: #d3d3d3;">
+    <h3 class="panel-title" style="font-weight: 500; font-size: 22px; ">Flat Rate</h3>
   </div>
-  <div class="panel-body blue-text">
-    <h4>{{ name }}</h4>
-    <br />
-    <h4>{{ email }}</h4>
+  <div class="panel-body blue-text" style="padding-top: 1px;">
+    <h1 class="text-center text-success bigger" style="margin: 0;">${{ cost }}</h1>
+    <h4 class="text-center text-success">Due this month</h4>
+    
+    <div class="row">
+    <div class="col-xs-6">
+    <h4 class="text-left">Electric: </h4>
+    <h4 class="text-left">Water: </h4>
+    <h4 class="text-left">Gas: </h4>
+    </div>
+    <div class="col-xs-6">
+    <h4 class="text-right">{{ electric }}</h4>
+    <h4 class="text-right">{{ water }}</h4>
+    <h4 class="text-right">{{ gas }}</h4>
+    </div>
+</div>
+<div class="row">
+<div class="col-xs-12 text-center">
+<form action="/btn_pay/" method="Post">
+    <button type="button" class="btn btn-success btn-sm active">Link Payment</button>
+</form>
+</div>
+</div>
 </div>
 
 </div>
@@ -48,7 +69,7 @@ Dashboard
 
 <div class="col-xs-8">
 <div class="panel panel-default">
-  <div class="panel-heading">
+  <div class="panel-heading" style="background: #fff; border-color: #fff;">
     <h3 class="panel-title">Bill Trends</h3>
   </div>
   <div class="panel-body blue-text bill-chart">

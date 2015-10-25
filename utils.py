@@ -120,35 +120,8 @@ def convertIntToMonth(n):
     while n < 1:
         n += 12
     return n
-#     if n > 0:
-#         return n
-#     elif n == 0:
-#         return 12
-#     else:
-#         if int(n/12) < 0:
-#             return (n+12)
-#         else:
-#             multiples = int(n/12)
-#             m = multiples * 12
-#             r = n-m
-#             return (n+m+r)
             
-
 def breakDownMonthlyCosts(months, period, padding):
-    
-#     monthlyBills = []
-#     utilitySplit = {}
-#     for bill in bills:
-#         m = bill.due.month
-#         cost = bill.cost
-#         bType = bill.type
-#         if month == m:
-#             monthlyBills.append(bill)
-#             if bType in utilitySplit:
-#                 utilitySplit[bType] += cost
-#             else:
-#                 utilitySplit[bType] = cost
-    
     expenseSplit = {}
     for utilitySplit in months:
         for bType in months[utilitySplit]:
@@ -160,7 +133,6 @@ def breakDownMonthlyCosts(months, period, padding):
     
     monthlyCost = 0
     for utility in expenseSplit:
-        print "utility"
         total = expenseSplit[utility]
         expenseSplit[utility] = (float(total/period))*padding
         monthlyCost += expenseSplit[utility]
