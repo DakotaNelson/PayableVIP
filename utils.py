@@ -33,6 +33,7 @@ def achCharge(amount, routingNo, acctNo):
 
     r = requests.post('https://w1.mercurycert.net/paymentsapi/ACH/Authorize',
                       json = params,
+                      timeout = 10,
                       auth = HTTPBasicAuth('6013521114','xyz'))
 
     return r.json()
