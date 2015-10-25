@@ -10,7 +10,7 @@ $(document).ready(function() {
             .rangeRound([height, 0]);
 
   var color = d3.scale.ordinal()
-      .range(["blue", "green", "red"]);
+      .range(["#2ecc71", "#f39c12", "#3498db"]);
 
   var xAxis = d3.svg.axis()
         .scale(x)
