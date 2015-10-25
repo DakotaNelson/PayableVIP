@@ -57,9 +57,7 @@ def dashboard():
     fname = u.fname
     lname = u.lname
     username = u.username
-    
-    print getMonthlyBillInfo()
-    
+        
     
     name = fname + " " + lname
     email=u.email
