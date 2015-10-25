@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title%}
+Index
+{% endblock %}
+
+{% block css %}
+    <link href="{{ url_for('static', filename='css/macbook.css') }}" rel="stylesheet" media="all">
+    <link href="{{ url_for('static', filename='css/custom2.css') }}" rel="stylesheet" media="all">
+{% endblock %}
+
+
+
+{% block body %}
+<div class="container-fluid">
+<div class="row top-buffer">
+</div>
+
+
+<div class="row">
+<div class="col-xs-offset-4 col-xs-4">
+<form action="/questions/" method="Post">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Street Address</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="231 Forest Street">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">City</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Wellesley">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">State</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="MA">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Bank Account Number</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Account Number">
+      </div>
+      
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+</div>
+</div>
+{% endblock %}

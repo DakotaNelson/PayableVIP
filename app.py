@@ -29,13 +29,27 @@ def test():
 
     return render_template('test.html', u="blah")
 
-@app.route('/questions/')
+@app.route('/questions/', methods=['POST', 'GET'])
 def questions():
     u = User.login("arjun", "password")
 
     return render_template('questions.html', u=u.username)
 
-@app.route('/dashboard/')
+@app.route('/registration/')
+def registration():
+    
+    return render_template('registration.html')
+
+
+@app.route('/additional_info/', methods=['POST', 'GET'])
+def info():
+#     req = request.get_json()
+#     print req["username"]
+#     u = User.signup("", "")
+
+    return render_template('additional.html')
+
+@app.route('/dashboard/', methods=['POST', 'GET'])
 def dashboard():
     u = User.login("arjun", "password")
     fname = u.fname
@@ -51,7 +65,7 @@ def dashboard():
     billDue = dueDate().strftime("%A, %B %d")
     return render_template('dashboard.html', dueDate=billDue, name=name, email=email, city=city, address=address, state=state, zipcode=zipcode)
 
-@app.route('/api/add-account', methods=['POST'])
+@app.route('/api/add-account/', methods=['POST'])
 def addAccount():
     req = request.get_json()
 
@@ -96,7 +110,7 @@ def addAccount():
 
     return json.dumps({"status":"success"})
 
-@app.route('/api/make-payment', methods=['POST'])
+@app.route('/api/make-payment/', methods=['POST'])
 def makePayment():
     req = request.get_json()
 
