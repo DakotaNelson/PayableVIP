@@ -51,10 +51,14 @@ def dueDate():
     d.replace(day=20)
     return d
 
+def billPay():
+    u = User.login("arjun", "password")
+    
+    bills = Bills.Query.all(username=u.username)
     
 def monthlyAverage():
     
-    data = Bills.Query.all() 
+    data = Bills.Query.all()
 
     utilities = []
     # get all the unique utilities types
