@@ -160,7 +160,6 @@ def breakDownMonthlyCosts(months, period, padding):
 
     monthlyCost = 0
     for utility in expenseSplit:
-        print "utility"
         total = expenseSplit[utility]
         expenseSplit[utility] = (float(total/period))*padding
         monthlyCost += expenseSplit[utility]

@@ -98,7 +98,6 @@ def addAccount():
     # validate the account with a $1 charge
     res = achCharge(1, req['routingNo'], req['acctNo'])
 
-    print(res)
     if res['CmdStatus'] != 'Approved':
         return json.dumps({"status": "fail",
                 "reason": "Account invalid."})
