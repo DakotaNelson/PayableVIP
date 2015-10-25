@@ -1,7 +1,7 @@
 $(document).ready(function() {
-  var margin = {top: 20, right: 90, bottom: 60, left: 60},
+  var margin = {top: 20, right: 100, bottom: 60, left: 60},
       width = 800 - margin.left - margin.right,
-      height = 300 - margin.top - margin.bottom;
+      height = 460 - margin.top - margin.bottom;
 
   var x = d3.scale.ordinal()
             .rangeRoundBands([0, width], .1);
@@ -133,6 +133,8 @@ $(document).ready(function() {
            .attr("x", function(d) { return width + 3; })
            .attr("y", y(data.monthlyRate.cost) + 4)
            .text('$' + data.monthlyRate.cost.toFixed(2));
+
+      $(".cost").text('$' + data.monthlyRate.cost.toFixed(2));
     });
 
   });

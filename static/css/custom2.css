@@ -65,3 +65,12 @@ h4 {
 .label-line {
   stroke: black;
 }
+
+.chart {
+  height: 520px;
+}
+
+.result {
+  height: 20px;
+  padding-top: 8px;
+}
