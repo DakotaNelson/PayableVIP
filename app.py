@@ -60,26 +60,20 @@ def dashboard():
     u = User.login("arjun", "password")
     fname = u.fname
     lname = u.lname
-<<<<<<< HEAD
-        
-    
-=======
     username = u.username
 
-
->>>>>>> fc1a4b3c857fb88e4cbc1631188f073b1f0dd403
     name = fname + " " + lname
     email=u.email
     zipcode = u.zipcode
     state = u.state
     address = u.streetAddress
     city = u.city
-    
+
 #     monthly = getMonthlyRates("arjun")
 #     cost = monthly["cost"]
 #     cost = round(cost, 2)
 #     split = monthly["split"]
-#     
+#
 #     water = split["water"]
 #     gas = split["gas"]
 #     electric = split["electric"]
@@ -88,7 +82,7 @@ def dashboard():
     electric = 139.16
     gas = 140.74
     cost = 337
-    
+
 
     billDue = dueDate().strftime("%A, %B %d")
     return render_template('dashboard.html', dueDate=billDue, name=name, email=email, city=city, address=address, state=state, zipcode=zipcode, cost=cost, water=water, gas=gas, electric=electric)
@@ -161,7 +155,7 @@ def makePayment():
     except:
         return json.dumps({"status": "fail",
                 "reason": "Unable to log user in."})
-        
+
     # attempt the payment
     res = achCharge(float(req['amount']), u.routingNo, u.acctNo)
     if res['CmdStatus'] != 'Approved':
