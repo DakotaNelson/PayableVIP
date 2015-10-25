@@ -25,9 +25,7 @@ def index():
 def test():
     #u = User.login("arjun", "password")
 
-    #predictBills(3)
-
-    monthlyAverage()
+    predictBills(3, 'dakota')
 
     return render_template('test.html', u="blah")
 
