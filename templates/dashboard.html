@@ -4,8 +4,62 @@
 Dashboard
 {% endblock %}
 
+{% block css %}
+<!-- Style sheet link -->
+<link href="{{ url_for('static', filename='css/custom2.css') }}" rel="stylesheet" media="all">
+{% endblock %}
+
 {% block body %}
-<p>This is the dashboard.</p>
+<div class="container-fluid">
+
+
+
+<div class="row">
+
+
+<div class="col-xs-4">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Your Profile</h3>
+  </div>
+  <div class="panel-body blue-text">
+    <h4>{{ name }}</h4>
+    <h4>{{ email }}</h4>
+    <h4>{{ address }}</h4>
+    <h4>{{ city }}, {{ state }} {{ zipcode }}</h4>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Flat Rate, Fair Rate</h3>
+  </div>
+  <div class="panel-body blue-text">
+    <h4>{{ name }}</h4>
+    <br />
+    <h4>{{ email }}</h4>
+</div>
+
+</div>
+
+</div>
+
+<div class="col-xs-8">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Bill Trends</h3>
+  </div>
+  <div class="panel-body blue-text">
+    <h4>On average what is the price of your fucking heating bill?</h4>
+    
+  </div>
+  
+</div>
+
+</div>
+
+</div>
+
 
 {% for customer in inStore %}
   {{ customer.fname }}
@@ -13,3 +67,5 @@ Dashboard
 {% endfor %}
 
 {% endblock %}
+
+</div>

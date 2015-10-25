@@ -1,6 +1,6 @@
 import requests
 from requests.auth import HTTPBasicAuth
-
+from parse_rest.user import User
 from datetime import date
 
 def achCharge(amount, routingNo, acctNo):
@@ -44,3 +44,7 @@ def dueDate():
     d = date.today()
     d.replace(day=20)
     return d
+
+def billPay():
+    u = User.login("arjun", "password")
+    

@@ -1,3 +1,5 @@
+@import url('http://fonts.googleapis.com/css?family=Montserrat');
+
 html,
 body {
   /* background-color: #330f17; */
@@ -21,7 +23,7 @@ body {
      while the background image is loading */
   background-color: #464646;
   
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-family: 'Montserrat', "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   font-weight: 300;
 }
 

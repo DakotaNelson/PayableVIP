@@ -3,7 +3,7 @@ from parse_rest.connection import register as parse_register
 from parse_rest.user import User
 import json
 
-from utils import achCharge
+from utils import achCharge, dueDate
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -31,10 +31,21 @@ def questions():
 
     return render_template('questions.html', u=u.username)
 
-@app.route('/dashboard')
+@app.route('/dashboard/')
 def dashboard():
+    u = User.login("arjun", "password")
+    fname = u.fname
+    lname = u.lname
+    
+    name = fname + " " + lname
+    email=u.email
+    zipcode = u.zipcode
+    state = u.state
+    address = u.streetAddress
+    city = u.city
+    
     billDue = dueDate().strftime("%A, %B %d")
-    return render_template('dashboard.html', dueDate=billDue)
+    return render_template('dashboard.html', dueDate=billDue, name=name, email=email, city=city, address=address, state=state, zipcode=zipcode)
 
 @app.route('/api/add-account', methods=['POST'])
 def addAccount():
