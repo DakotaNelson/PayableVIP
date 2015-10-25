@@ -5,8 +5,8 @@ Dashboard
 {% endblock %}
 
 {% block js %}
-<!--  <script src="{{ url_for('static', filename='js/billChart.js') }}"></script>
-<script src="{{ url_for('static', filename='js/lib/d3.min.js') }}" charset="utf-8"></script>-->
+<script src="{{ url_for('static', filename='js/billChart.js') }}"></script>
+<script src="{{ url_for('static', filename='js/lib/d3.min.js') }}" charset="utf-8"></script>
 <script src="{{ url_for('static', filename='js/button.js') }}" charset="utf-8"></script>
 
  {% endblock %}
@@ -24,7 +24,11 @@ Dashboard
 <div class="col-xs-4">
 <div class="panel panel-default">
   <div class="panel-heading" style="background: #fff; border-color: #fff;">
-    <h3 class="panel-title text-center">Your Profile</h3>
+  <div class="text-center">
+    <img class="text-left" style="max-width:50px; position: relative; right: 80px; bottom: 20px;" alt="LevelPay" src="/static/img/zach.png">
+    <img style="max-width:30px; position: relative; right: 20px;" alt="LevelPay" src="/static/img/user.png">
+    <h3 class="panel-title text-center" style="position: relative; right: 20px; font-weight: 500; font-size: 25px; display: inline-block; color: #A9A9A9;">Your Profile</h3>
+  </div>
   </div>
   <div class="panel-body" style="color: #d3d3d3;">
     <h4>{{ name }}</h4>
@@ -36,28 +40,33 @@ Dashboard
 
 <div class="panel panel-default">
   <div class="panel-heading" style="background: #fff; border-color: #fff; color: #d3d3d3;">
-    <h3 class="panel-title" style="font-weight: 500; font-size: 22px; ">Flat Rate</h3>
+        <img style="max-width:30px;" alt="LevelPay" src="/static/img/pig.png">
+        <h3 class="panel-title text-left" style="font-weight: 500; font-size: 25px; display: inline-block; color: #A9A9A9;">Flat Rate</h3>
+        
   </div>
   <div class="panel-body blue-text" style="padding-top: 1px;">
-    <h1 class="text-center text-success bigger" style="margin: 0;">${{ cost }}</h1>
+    <h1 class="text-center text-success bigger" style="margin: 0;">
+    <span class="cost"><img src="{{ url_for('static', filename='img/loading.gif') }}"></img></span>
+    </h1>
     <h4 class="text-center text-success">Due this month</h4>
-    
+
     <div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-6" style="color: #d3d3d3;">
     <h4 class="text-left">Electric: </h4>
     <h4 class="text-left">Water: </h4>
     <h4 class="text-left">Gas: </h4>
     </div>
-    <div class="col-xs-6">
-    <h4 class="text-right">{{ electric }}</h4>
-    <h4 class="text-right">{{ water }}</h4>
-    <h4 class="text-right">{{ gas }}</h4>
+    <div class="col-xs-6" style="color: #808080; font-weight: bold;">
+    <h4 class="text-right subcost">{{ electric }}</h4>
+    <h4 class="text-right subcost">{{ water }}</h4>
+    <h4 class="text-right subcost">{{ gas }}</h4>
     </div>
 </div>
 <div class="row">
 <div class="col-xs-12 text-center">
 <form action="/btn_pay/" method="Post">
-    <button type="button" class="btn btn-success btn-sm active">Link Payment</button>
+    <button type="button" class="btn btn-success btn-sm active make-payment">Make Payment</button>
+    <div class="result"></div>
 </form>
 </div>
 </div>
@@ -66,11 +75,11 @@ Dashboard
 </div>
 
 </div>
-
 <div class="col-xs-8">
-<div class="panel panel-default">
-  <div class="panel-heading" style="background: #fff; border-color: #fff;">
-    <h3 class="panel-title">Bill Trends</h3>
+<div class="panel panel-default chart">
+<div class="panel-heading" style="background: #fff; border-color: #fff; color: #d3d3d3;"> 
+<img style="max-width:30px;" alt="LevelPay" src="/static/img/graph.png">
+    <h3 class="panel-title" style="font-weight: 500; font-size: 20px; display: inline-block; color: #A9A9A9;">Bill Trends</h3>
   </div>
   <div class="panel-body blue-text bill-chart">
     <!-- D3 chart goes here -->

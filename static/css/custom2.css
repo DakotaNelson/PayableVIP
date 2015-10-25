@@ -28,6 +28,7 @@ h4 {
 	font-weight: normal;
 }
 
+
 .footer {
   position: absolute;
   bottom: 0;
@@ -64,4 +65,13 @@ h4 {
 
 .label-line {
   stroke: black;
+}
+
+.chart {
+  height: 565px;
+}
+
+.result {
+  height: 20px;
+  padding-top: 8px;
 }
