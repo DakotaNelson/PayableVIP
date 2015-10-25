@@ -15,7 +15,8 @@ def index():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('dashboard.html')
+    customers = [{"fname":"Bob"}, {"fname":"Joe"}]
+    return render_template('dashboard.html', inStore=customers)
 
 if __name__ == '__main__':
     app.run()

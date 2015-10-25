@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 
+{% block title%}
+Dashboard
+{% endblock %}
+
 {% block body %}
-This is the dashboard.
+<p>This is the dashboard.</p>
+
+{% for customer in inStore %}
+  {{ customer.fname }}
+  <br>
+{% endfor %}
+
 {% endblock %}
