@@ -3,7 +3,8 @@ from parse_rest.connection import register as parse_register
 from parse_rest.user import User
 import json
 
-from utils import achCharge, predictBills, monthlyAverage, dueDate
+from utils import achCharge, predictBills, monthlyAverage, dueDate,\
+    getMonthlyBillingInfo, getMonthlyRates
 
 from objects import Bills
 
@@ -23,9 +24,10 @@ def index():
 
 @app.route('/test/')
 def test():
-    #u = User.login("arjun", "password")
+    u = User.login("arjun", "password")
 
-    predictBills(3, 'dakota')
+#     print predictBills(6, 'arjun')
+    print getMonthlyRates("arjun")
 
     return render_template('test.html', u="blah")
 
@@ -54,7 +56,11 @@ def dashboard():
     u = User.login("arjun", "password")
     fname = u.fname
     lname = u.lname
-
+    username = u.username
+    
+    print getMonthlyBillInfo()
+    
+    
     name = fname + " " + lname
     email=u.email
     zipcode = u.zipcode
