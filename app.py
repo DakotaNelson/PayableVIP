@@ -39,7 +39,7 @@ def questions():
 
 @app.route('/registration/')
 def registration():
-    
+
     return render_template('registration.html')
 
 
@@ -164,12 +164,16 @@ def getData():
                 "reason": "Must include username."})
 
     myBills = monthlyAverage(Bills.Query.filter(username=username))
-    allBills = monthlyAverage()
-    predBills = predictBills(3, username)
+    #allBills = monthlyAverage()
+    #predBills = predictBills(3, username)
 
+    return json.dumps({'myBills':myBills})
+
+    """
     return json.dumps({'myBills': myBills,
                        'allBills': allBills,
                        'predictedBills': predBills})
+    """
 
 
 if __name__ == '__main__':

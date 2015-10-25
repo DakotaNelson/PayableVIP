@@ -1,0 +1,98 @@
+NAME:       Electric Bill Data	
+
+TYPE:       Sample	
+
+SIZE:       120 observations, 13 variables 	
+
+SEE:        http://www.amstat.org/publications/jse/v11n1/datasets.mclaren.html
+		
+DESCRIPTIVE ABSTRACT:		
+The dollar amount for a monthly (January 1991 through December 2000) 
+household electric bill is presented as a time series. In addition, 
+potential explanatory variables are included. Twelve representative 
+monthly values are provided for the average temperature, for 
+heating degree days, and for cooling degree days (not for each 
+month for each year). Additional variables give the family size 
+each month and indicate when a new electric meter and new heating 
+and cooling equipment was installed. To convert the billing amount 
+to estimated power consumption, a tiered rate function (supplied 
+in the accompanying Instructor's Manual) and the costs of 
+associated riders (provided here) must be used. Consumption 
+estimates resulting from this information are supplied.	
+		
+SOURCES:		
+Personal data records were used for the actual billing amount and 
+other household variables. Temperature and heating and cooling 
+degree days can be retrieved from NOAA sites such as 
+http://lwf.ncdc.noaa.gov/oa/documentlibrary/hcs/hcs.html. Heating 
+and cooling degree days computation methods were revised in July 
+2002.
+
+DATASET LAYOUT:
+
+ Column  Description                                   Label
+ 1 -  3  Observation number                            NUM
+ 5 -  8  Year                                          YEAR
+10 - 12  Month                                         MONTH
+14 - 19  Amount of bill (in dollars),                  BILL
+           includes 5% sales tax 
+21 - 24  Average temperature (in degrees Fahrenheit)   TEMP
+26 - 29  Heating Degree Days                           HDD
+31 - 33  Cooling Degree Days                           CDD
+35       Number of family members at home              SIZE
+37       New meter? (indicator variable, 1 = yes)      METER
+39       New heat pump 1? (indicator variable, 1= new) PUMP1
+41       New heat pump 2? (indicator variable, 1= new) PUMP2
+43 - 52  Total charge (per kwh) for all riders         RIDER TOTAL
+54 - 58  Calculated consumption (in kwh)               CONSUMPTION
+
+The dataset contains values for January 1991 through December 2000. 
+The values are aligned and delimited by spaces. Missing values are 
+denoted by "*."
+
+SPECIAL NOTES: 
+The entry for the BILL in January 1994 is missing. The entry of $0.00 
+for August 1999 is correct. This value prompted the power company to 
+replace the electric meter.
+
+Heating Degree Days is defined as the cumulative number of degrees in 
+a month by which the mean temperature falls below 65 degrees. These 
+values are thirty-year averages for this geographic location.
+
+Cooling Degree Days is defined as the cumulative number of degrees in 
+a month by which the mean temperature rises above 65 degrees. These 
+values are thirty-year averages for this geographic location.
+
+Twelve values are provided for Average Temperature, Heating Degree Days, 
+and Cooling Degree Days. These values repeat over the course of the 
+time series.
+
+PEDAGOGICAL NOTES
+These data are appropriate to use in statistics classes at a variety 
+of levels. Using only the billing amounts, the data provide a time 
+series for students to examine visually for seasonal patterns and 
+trend. Analysis could lead to the discussion of the treatment of 
+missing values and outliers, but if this is beyond the scope of the 
+course, the instructor could certainly adjust the values for those 
+periods prior to giving the data to the students. This time series 
+is quite effective for teaching seasonal decomposition and other 
+forecasting techniques. When additional variables are incorporated, 
+it is a good application for multiple regression. The data can also 
+be used for spreadsheet exercises.
+
+SUBMITTED BY:
+Constance McLaren
+Analytical Department
+Indiana State University
+Terre Haute, IN 47809
+USA
+c-mclaren@indstate.edu
+
+Bruce McLaren
+Organizational Department
+Indiana State University
+Terre Haute, IN 47809
+USA
+b-mclaren@indstate.edu
+
+--
